@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="js/polymaps.js"></script>
+    <script type="text/javascript" src="js/d3.v2.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <style type="text/css">
+
+@import url("css/bootstrap.min.css");
+
+#map {
+    height: 90%;
+    border: solid thin black;
+}
+
+#crime .crime_circle {
+  fill-opacity: 0.8;
+}
+#crime .crime_circle:hover {
+  fill-opacity: 1.0;
+}
+
+.popover-title {
+    font-weight: bold;
+}
+
+#legend dd {
+    width: 10px;
+    height: 10px;
+}
+
+#legend dd, #legend dt {
+    float: left;
+    vertical-align: middle;
+}
+
+#legend dd {
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+.crime_cartheft { fill: red; stroke: red; background-color: red; }
+.crime_carbreakin { fill: blue; stroke: blue; background-color: blue;}
+.crime_housebreakin { fill: orange; stroke: orange; background-color: orange; }
+.crime_other { fill: green; stroke: green; background-color: green}
+
+    </style>
+  </head>
+  <body>
+    <div id="map">
+        <script type="text/javascript" src="js/bounds.js"></script>
+    </div>
+    <div id="legend">
+        <dd>
+            <dt>Car Theft</dt>
+            <dd class="crime_cartheft"></dd>
+            <dt>Car Break-in</dt>
+            <dd class="crime_carbreakin"></dd>
+            <dt>House Break-in</dt>
+            <dd class="crime_housebreakin"></dd>
+            <dt>Other</dt>
+            <dd class="crime_other"></dd>
+        </dd>
+    </div>
+  </body>
+</html>
