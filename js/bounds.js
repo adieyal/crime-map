@@ -16,7 +16,35 @@ map.add(po.geoJson()
     .id("crime")
     .on("load", setFeatures)
 )
+
+map.add(po.geoJson() 
+    .url("http://tilestache/subplaces/{Z}/{X}/{Y}.geojson")
+    .id("subplaces")
+    .on("load", loadSubplaces)
+);
+
 map.add(po.compass().pan("none"))
+
+function loadSubplaces(e) {
+    e.features.map(function(feature) {
+        var data = feature.data.properties;
+        d3.select(feature.element)
+            .data([data])
+            .attr("title", data["SP_NAME"])
+            .attr("data-content", function(el) {
+                console.log(el);
+                return "<dl>"
+                    + "<dt>Code:</dt><dd>" + el["sp_code"] + "</dd>"
+                    + "<dt>Name:</dt><dd>" + el["sp_name"] + "</dd>"
+                    + "</dl>"
+            })
+            .each(function(el) {
+                $(this).popover({
+                    trigger : "hover"
+                })
+            });
+    });
+}
 
 function setFeatures(e){
   for (var i = 0; i < e.features.length; i++) {
@@ -45,7 +73,8 @@ function setFeatures(e){
                 + "<dt>Date</dt><dd>" + data["Date"] + "</dd>"
                 + "<dt>Time of Day</dt><dd>" + data["Night/Day"] + "</dd>"
                 + "<dt>Address</dt><dd>" + data["Address"] + "</dd>"
-                + "<dt>Description</dt><dd>" + data["Details"] + "</dd>";
+                + "<dt>Description</dt><dd>" + data["Details"] + "</dd>"
+                + "</dl>";
         })
         .each(function(el) {
             $(this).popover({
